@@ -6,8 +6,8 @@
   "plugins": [
     {
       "name": "bid-leveling",
-      "source": ".",
-      "description": "Automated bid leveling for construction projects. Reads PDFs and Excel files, normalizes bids, ranks contractors, produces a 7-tab Excel workbook."
+      "source": "./plugins/bid-leveling",
+      "description": "Automated bid leveling for construction projects."
     }
   ]
 }
