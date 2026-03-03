@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/validate-xlsx.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If you just completed a bid leveling analysis, verify: (1) The Excel workbook was created with formulas, not hardcoded values. (2) All assumptions are documented. (3) Data quality warnings are included. (4) The chat summary includes an executive summary, leveled table, and per-bidder justification. If any are missing, fix them before finishing."
+          }
+        ]
+      }
+    ]
+  }
+}
