@@ -1,15 +1,3 @@
 {
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "If you just wrote an .xlsx file as part of a bid leveling analysis, verify it contains formulas (not hardcoded values) and all 7 required tabs. If the file is not related to bid leveling, ignore this check."
-          }
-        ]
-      }
-    ]
-  }
+  "hooks": {}
 }
