@@ -7,7 +7,9 @@
     {
       "name": "bid-leveling",
       "source": "./plugins/bid-leveling",
-      "description": "Automated bid leveling for construction projects."
+      "description": "Automated bid leveling for construction projects.",
+      "version": "1.0.0",
+      "category": "construction"
     }
   ]
 }
