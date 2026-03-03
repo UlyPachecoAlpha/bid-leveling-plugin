@@ -55,8 +55,34 @@ If the project type isn't obvious from the documents, **ask the user before proc
 
 ## How to Read Bid Documents
 
-### Reading PDFs
-Use pdfplumber (install with pip if needed):
+IMPORTANT: Check what runtimes are available before starting. Try python3 and node. Use whichever is installed. On Windows, Python may not be available so prefer Node.js.
+
+### Reading Excel Files with Node.js (preferred on Windows)
+Install xlsx package first: npm install xlsx
+```javascript
+const XLSX = require('xlsx');
+const wb = XLSX.readFile('path/to/bid.xlsx');
+wb.SheetNames.forEach(name => {
+    const data = XLSX.utils.sheet_to_json(wb.Sheets[name], {header: 1});
+    console.log(name, data.length, 'rows');
+});
+```
+
+### Creating Excel Workbooks with Node.js
+Install exceljs: npm install exceljs
+Use ExcelJS to create formatted workbooks with formulas. Write a .js script then execute it.
+
+### Reading PDFs with Node.js
+Install pdf-parse: npm install pdf-parse
+```javascript
+const fs = require('fs');
+const pdf = require('pdf-parse');
+const buffer = fs.readFileSync('bid.pdf');
+pdf(buffer).then(data => console.log(data.text));
+```
+
+### Python Alternative (if available)
+If Python is available, use pdfplumber for PDFs and openpyxl for Excel files.
 ```python
 import pdfplumber
 with pdfplumber.open("bid.pdf") as pdf:
@@ -64,9 +90,6 @@ with pdfplumber.open("bid.pdf") as pdf:
         text = page.extract_text()
         tables = page.extract_tables()
 ```
-
-### Reading Excel Files
-Use openpyxl (install with pip if needed):
 ```python
 from openpyxl import load_workbook
 wb = load_workbook("bid.xlsx", data_only=True)
