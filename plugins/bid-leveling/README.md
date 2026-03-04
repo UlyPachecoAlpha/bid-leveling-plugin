@@ -1,6 +1,6 @@
-# Bid Leveling Plugin for Claude Code
+# Bid Leveling Plugin for Claude Code (v2.0)
 
-A Claude Code plugin that reads contractor bid documents (PDFs and Excel files), normalizes bids, and produces a professional multi-worksheet Excel workbook.
+A Claude Code plugin that reads contractor bid documents (PDFs and Excel files), converts PDFs to more efficient formats, normalizes bids, and produces a professional multi-worksheet Excel workbook. Includes time-to-completion estimates and an auto mode that works without asking questions.
 
 ## Installation
 
@@ -11,28 +11,31 @@ A Claude Code plugin that reads contractor bid documents (PDFs and Excel files),
 
 Restart Claude Code after installing.
 
-## Usage
+## Commands
 
-Upload bid PDFs or Excel files, then either:
-- Run `/bid-leveling:level-bids` for the full analysis
-- Run `/bid-leveling:bid-summary` for a quick overview
-- Just ask naturally: "compare these bids" or "level these proposals"
+| Command | What it does |
+|---|---|
+| `/bid-leveling:level-bids` | Full interactive analysis with clarifying questions. |
+| `/bid-leveling:level-bids-auto` | Full analysis with NO questions - makes and documents assumptions. |
+| `/bid-leveling:bid-summary` | Quick overview comparison (~2-3 min). |
+| `/bid-leveling:convert-bids` | Convert PDF bid docs to Excel/Word before analysis. |
 
-## What It Produces
+## Key Features
 
-A 7-tab Excel workbook with live formulas:
-1. Summary - Executive recommendation
-2. Leveled Comparison - Normalized bid totals
-3. Ranking Detail - Weighted scoring model
-4. Allowance Adjustments - Normalization detail
-5. Exclusion Add-backs - Missing scope priced back in
-6. Risk Analysis - 5-category risk scoring
-7. Assumptions and Gaps - Full audit trail
+### Time-to-Completion Estimates
+Every command shows a running progress tracker throughout the analysis.
+
+### Auto Mode (No Questions)
+`/level-bids-auto` makes reasonable assumptions and documents them all. Fast results, review assumptions after.
+
+### PDF Conversion (MCP Server)
+Converts PDFs to Excel/Word before analysis for better data extraction. Works with PDF.co API (free tier) or local fallback. Set `PDFCO_API_KEY` environment variable for best results.
+
+### 7-Tab Excel Workbook Output
+Summary, Leveled Comparison, Ranking Detail, Allowance Adjustments, Exclusion Add-backs, Risk Analysis, Assumptions and Gaps.
 
 ## Project Types
-
 Commercial, Residential, and Civil/Infrastructure.
 
 ## Requirements
-
-Python packages pdfplumber and openpyxl (installed automatically if missing).
+Node.js (npm packages installed automatically). Optional: PDFCO_API_KEY for PDF conversion.
