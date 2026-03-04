@@ -1,3 +1,16 @@
 {
-  "hooks": {}
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"try{require('${CLAUDE_PLUGIN_ROOT}/mcp/pdf-converter-server.js');process.exit(0)}catch(e){process.exit(0)}\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
 }
