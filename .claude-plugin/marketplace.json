@@ -7,8 +7,8 @@
     {
       "name": "bid-leveling",
       "source": "./plugins/bid-leveling",
-      "description": "Automated bid leveling for construction projects.",
-      "version": "1.0.0",
+      "description": "Automated bid leveling for construction projects. PDF conversion, interactive and auto modes, time estimates, 7-tab Excel workbook output.",
+      "version": "2.0.0",
       "category": "construction"
     }
   ]
