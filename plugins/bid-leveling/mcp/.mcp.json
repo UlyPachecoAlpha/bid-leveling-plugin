@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "pdf-converter": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/mcp/pdf-converter-server.js"
+      ],
+      "env": {
+        "PDFCO_API_KEY": "${PDFCO_API_KEY:-}"
+      }
+    }
+  }
+}
