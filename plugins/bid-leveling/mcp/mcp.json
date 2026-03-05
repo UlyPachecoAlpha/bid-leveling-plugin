@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "bid-leveling-tools": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/pdf-converter-server.js"],
+      "env": {
+        "PDFCO_API_KEY": "${PDFCO_API_KEY:-}",
+        "POWER_AUTOMATE_WEBHOOK_URL": "${POWER_AUTOMATE_WEBHOOK_URL:-}"
+      }
+    }
+  }
+}

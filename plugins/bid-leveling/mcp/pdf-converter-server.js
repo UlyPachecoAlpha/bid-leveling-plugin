@@ -1,16 +1,12 @@
 #!/usr/bin/env node
 /**
- * PDF Converter MCP Server for Bid Leveling Plugin
- * 
- * Converts PDFs to Excel/Word for better data extraction before bid analysis.
- * Supports two backends:
- *   1. PDF.co API (high quality, requires API key)
- *   2. Local conversion via pdf-parse + xlsx (free, lower quality)
+ * Bid Leveling MCP Server
  * 
  * Tools exposed:
- *   - convert_pdf_to_excel: Convert PDF bid document to XLSX
- *   - convert_pdf_to_word:  Convert PDF bid document to DOCX  
- *   - list_conversions:     Show recent conversion history
+ *   - convert_pdf_to_excel:      Convert PDF bid document to XLSX
+ *   - convert_pdf_to_word:       Convert PDF bid document to DOCX  
+ *   - list_conversions:          Show recent conversion history
+ *   - trigger_power_automate:    Trigger a Power Automate workflow via webhook
  */
 
 const { Server } = require("@modelcontextprotocol/sdk/server/index.js");
@@ -130,6 +126,23 @@ function downloadFile(url, outputPath) {
   });
 }
 
+// ── Power Automate webhook ──
+async function triggerPowerAutomate(action, title, priority, customUrl) {
+  const webhookUrl = customUrl || process.env.POWER_AUTOMATE_WEBHOOK_URL;
+  if (!webhookUrl) throw new Error("No Power Automate webhook URL configured. Set POWER_AUTOMATE_WEBHOOK_URL environment variable or pass a custom URL.");
+
+  const payload = {
+    action: action || "bid_leveling_task",
+    title: title || "Bid Leveling Plugin Request",
+    priority: priority || "normal",
+    timestamp: new Date().toISOString(),
+    source: "bid-leveling-plugin"
+  };
+
+  const result = await httpPost(webhookUrl, payload, { "Content-Type": "application/json" });
+  return result;
+}
+
 // ── MCP Server Setup ──
 const server = new Server({ name: "bid-leveling-pdf-converter", version: "1.0.0" }, {
   capabilities: { tools: {} },
@@ -164,6 +177,19 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       name: "list_conversions",
       description: "List all PDF conversions performed in this session with their status and output paths.",
       inputSchema: { type: "object", properties: {} },
+    },
+    {
+      name: "trigger_power_automate",
+      description: "Trigger a Power Automate workflow via webhook. Use this to kick off automated tasks like PDF conversion via Adobe Acrobat, file processing, notifications, or any custom Power Automate flow. Requires POWER_AUTOMATE_WEBHOOK_URL env var or a custom URL parameter.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          action: { type: "string", description: "The action to perform (e.g. 'convert_pdf', 'notify_team', 'process_bids'). Default: 'bid_leveling_task'" },
+          title: { type: "string", description: "A descriptive title for this workflow run. Default: 'Bid Leveling Plugin Request'" },
+          priority: { type: "string", enum: ["low", "normal", "high", "urgent"], description: "Priority level. Default: 'normal'" },
+          webhook_url: { type: "string", description: "Optional: Override the default webhook URL for this specific call" },
+        },
+      },
     },
   ],
 }));
@@ -213,6 +239,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         `${i + 1}. ${path.basename(c.input)} -> ${c.format.toUpperCase()} (${c.method}, ${c.time}, ${c.status})\n   Output: ${c.output}`
       ).join("\n");
       return { content: [{ type: "text", text: summary }] };
+    }
+
+    if (name === "trigger_power_automate") {
+      const result = await triggerPowerAutomate(args.action, args.title, args.priority, args.webhook_url);
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+      const responseText = typeof result === "object" ? JSON.stringify(result, null, 2) : String(result);
+      return { content: [{ type: "text", text: `Power Automate flow triggered in ${elapsed}s.\nAction: ${args.action || "bid_leveling_task"}\nPriority: ${args.priority || "normal"}\nResponse:\n${responseText}` }] };
     }
 
     return { content: [{ type: "text", text: `Unknown tool: ${name}` }], isError: true };
