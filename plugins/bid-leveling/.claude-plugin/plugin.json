@@ -1,7 +1,7 @@
 {
   "name": "bid-leveling",
   "description": "Automated bid leveling plugin for construction projects. Reads contractor bid documents (PDFs, Excel), converts PDFs to Excel/Word for better extraction, normalizes bids, scores and ranks bidders, and produces a professional multi-worksheet Excel workbook. Includes interactive and auto (no-questions) modes with time-to-completion estimates.",
-  "version": "3.0.1",
+  "version": "2.0.0",
   "author": {
     "name": "UlyPachecoAlpha"
   }
