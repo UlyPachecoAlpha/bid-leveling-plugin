@@ -27,17 +27,12 @@ Update this block as you progress. When a phase completes, mark it done with act
 
 1. Ask for bid documents if not already provided.
 2. If PDFs are uploaded, check if the pdf-converter MCP tool is available. If so, offer to convert PDFs to Excel first for better data extraction. If the user agrees or if the PDFs appear to be table-heavy bid forms, convert them.
-3. Provide the amount of time it took for steps 1 and 2 to complete and a new estimate to complete the remaining steps.
-4. Check what runtime is available (node or python). Use whichever works. On Windows prefer Node.js.
-5. Provide the amount of time it took for steps 1, 2, 3, and 4 to complete and a new estimate to complete the remaining steps.
-6. Read the bid documents.
-7. Provide the amount of time it took for steps 1, 2, 3, 4, 5, and 6 to complete and a new estimate to complete the remaining steps.
-8. Ask clarifying questions about project type, SF, location, and priorities if not obvious from the documents.
-9. Provide the amount of time it took for steps 1, 2, 3, 4, 5, 6, 7, and 8 to complete and a new estimate to complete the remaining steps.
-10. Follow the bid-leveling skill 6-step workflow (it will auto-activate).
-11. Provide the amount of time it took for steps 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10 to complete and a new estimate to complete the remaining steps.
-12. Generate the 7-tab Excel workbook with formulas.
-13. Provide a chat summary with executive summary, leveled table, risk log, per-bidder justification.
+3. Check what runtime is available (node or python). Use whichever works. On Windows prefer Node.js.
+4. Read the bid documents.
+5. Ask clarifying questions about project type, SF, location, and priorities if not obvious from the documents.
+6. Follow the bid-leveling skill 6-step workflow (it will auto-activate).
+7. Generate the 7-tab Excel workbook with formulas.
+8. Provide a chat summary with executive summary, leveled table, risk log, per-bidder justification.
 
 ## Important
 - Never pick a winner without leveling first
