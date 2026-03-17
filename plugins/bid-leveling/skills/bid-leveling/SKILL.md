@@ -349,8 +349,6 @@ Every analysis must include **two deliverables**: an Excel workbook and a chat e
 
 Produce an Excel file with these tabs:
 
-You MUST use the bid_leveling_template.xlsx file as the exact structural template for your output workbook. Match every tab name exactly. Match every column header exactly. Match every row label exactly. Match all cell formatting (fonts, colors, number formats, column widths, borders). Do not add extra tabs, rename tabs, reorder columns, or change header labels. If a section in the template has placeholder rows, replace the placeholders with actual data but preserve the row structure. If you need more rows than the template provides, insert them following the same formatting pattern. The Leveled Bid Total row must always have a green highlight (E2EFDA). All currency cells must use the format $#,##0;($#,##0);"-". All score cells must use 0.0 format. The template has 5 bidder columns — use only as many as needed and hide or delete unused bidder columns.
-
 1. **Summary** — Executive summary, recommendation, best-value vs. lowest bidder callout
 2. **Leveled Comparison** — The Step 6 table with all bidders
 3. **Ranking Detail** — Score breakdown by category per bidder, weighted totals, final ranks
